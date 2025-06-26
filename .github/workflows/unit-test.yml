@@ -1,0 +1,27 @@
+name: Run Unit Test
+
+on:
+  push:
+    branches:
+      - feature-jv1
+      - feature-jv2
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Build with Maven
+      run: mvn clean compile
+
+    - name: Run Unit Tests
+      run: mvn test
